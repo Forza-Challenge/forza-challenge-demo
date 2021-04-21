@@ -14,9 +14,10 @@ defmodule FCDemo.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: FCDemo.PubSub},
       # Start the Endpoint (http/https)
-      FCDemoWeb.Endpoint
+      FCDemoWeb.Endpoint,
       # Start a worker by calling: FCDemo.Worker.start_link(arg)
       # {FCDemo.Worker, arg}
+      {Finch, name: FCDemo.Finch}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
