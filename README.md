@@ -1,19 +1,17 @@
 # FCDemo
 
-To start your Phoenix server:
+Forza Challenge API Demo
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server`
+## API
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+1. Create user
+```
+POST  /api/v1/users
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
-## Learn more
+body parameters: {"device_id": "72fe37ee-62f5-444f-a237-dc00c195d1c5"}
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+response: 200  {"user_id": "9bd44a8c-e130-4c1b-87d6-8f9d97c5f1e6"}
+
+errors: 400 {"error": "invalid device_id"}
+```

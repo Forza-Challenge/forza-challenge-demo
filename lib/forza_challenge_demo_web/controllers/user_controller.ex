@@ -4,7 +4,9 @@ defmodule FCDemoWeb.UserController do
   alias FCDemo.Cache
   alias FCDemo.Challenges
 
-  def create(conn, %{"device_id" => device_id}) do
+  def create(conn, params) do
+    device_id = Map.get(params, "device_id")
+
     with {:ok, :valid} <- valid_id(device_id) do
       user_id = Ecto.UUID.generate()
       :ok = create_user_challenge(user_id)

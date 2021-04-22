@@ -28,11 +28,9 @@ defmodule FCDemo.DataCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(FCDemo.Repo)
+    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(FCDemo.Repo, shared: not tags[:async])
 
-    unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(FCDemo.Repo, {:shared, self()})
-    end
+    on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
 
     :ok
   end
