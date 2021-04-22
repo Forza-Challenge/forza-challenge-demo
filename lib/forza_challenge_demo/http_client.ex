@@ -1,6 +1,6 @@
 defmodule FCDemo.HttpClient do
   @moduledoc """
-  HTTP request module impolementaion via finch
+  HTTP request module - finch
   """
 
   @finch_name FCDemo.Finch
