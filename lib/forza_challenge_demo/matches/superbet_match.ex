@@ -36,6 +36,7 @@ defmodule FCDemo.SuperbetMatch do
   def changeset(%__MODULE__{} = superbet_match, params \\ %{}) do
     all_fields = [
       :id,
+      :name,
       :starts_at,
       :betradar_id,
       :tournament_name,
