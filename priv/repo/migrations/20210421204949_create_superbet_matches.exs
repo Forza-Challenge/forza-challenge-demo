@@ -12,6 +12,9 @@ defmodule FCDemo.Repo.Migrations.CreateSuperbetMatches do
       add :draw_odds, :float, null: false
       add :away_team_odds, :float, null: false
 
+      add :home_team_name, :string, null: false
+      add :away_team_name, :string, null: false
+
       timestamps()
     end
   end

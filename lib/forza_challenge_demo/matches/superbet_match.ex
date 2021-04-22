@@ -26,6 +26,10 @@ defmodule FCDemo.SuperbetMatch do
     # "odds" -> "oi" == 4 -> "ov"
     field :away_team_odds, :float
 
+    # we get this fileds from tournament_name splitting on '·'
+    field :home_team_name, :string
+    field :away_team_name, :string
+
     timestamps()
   end
 
@@ -37,14 +41,14 @@ defmodule FCDemo.SuperbetMatch do
       :tournament_name,
       :home_team_odds,
       :draw_odds,
-      :away_team_odds
+      :away_team_odds,
+      :home_team_name,
+      :away_team_name
     ]
-
-    required_fields = [:id, :betradar_id, :home_team_odds, :draw_odds, :away_team_odds]
 
     superbet_match
     |> cast(params, all_fields)
-    |> validate_required(required_fields)
+    |> validate_required(all_fields)
     |> validate_number(:home_team_odds, greater_than_or_equal_to: 0)
     |> validate_number(:draw_odds, greater_than_or_equal_to: 0)
     |> validate_number(:away_team_odds, greater_than_or_equal_to: 0)

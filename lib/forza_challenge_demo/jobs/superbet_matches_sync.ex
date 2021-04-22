@@ -78,6 +78,8 @@ defmodule FCDemo.SuperbetMatchesSync do
   end
 
   defp upsert_betradar_match(match) do
+    [home_team_name, away_team_name] = String.split(match.mn, "·")
+
     params = %{
       id: match._id,
       name: match.mn,
@@ -86,7 +88,9 @@ defmodule FCDemo.SuperbetMatchesSync do
       tournament_name: match.tn2,
       home_team_odds: find_odds_by_oi(match.odds, @home_team_odds_oi),
       draw_odds: find_odds_by_oi(match.odds, @draw_odds_oi),
-      away_team_odds: find_odds_by_oi(match.odds, @away_team_odds_oi)
+      away_team_odds: find_odds_by_oi(match.odds, @away_team_odds_oi),
+      home_team_name: String.trim(home_team_name),
+      away_team_name: String.trim(away_team_name)
     }
 
     Matches.upsert_superebet_match(params)

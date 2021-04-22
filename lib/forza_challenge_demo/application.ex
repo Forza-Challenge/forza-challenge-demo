@@ -17,7 +17,13 @@ defmodule FCDemo.Application do
       FCDemoWeb.Endpoint,
       # Start a worker by calling: FCDemo.Worker.start_link(arg)
       # {FCDemo.Worker, arg}
-      {Finch, name: FCDemo.Finch}
+      {Finch, name: FCDemo.Finch},
+      {ConCache,
+       [
+         name: FCDemo.ConCache,
+         ttl_check_interval: :timer.seconds(60),
+         global_ttl: :timer.seconds(30 * 60)
+       ]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
