@@ -57,19 +57,39 @@ defmodule FCDemoWeb.ChallengeControllerTest do
 
     predictions =
       Enum.map(challenge_matches, fn %{"id" => match_id} ->
-        %{
-          match_id: match_id,
-          prediction: Enum.random(["home", "draw", "away"])
-        }
+        %{match_id: match_id, prediction: Enum.random(["home", "draw", "away"])}
       end)
 
-    resp =
+    conn =
       conn
       |> post(Routes.challenge_path(conn, :accept_user_predictions, user_id, challenge_id), %{
         "predictions" => predictions
       })
-      |> json_response(204)
 
-    assert resp == ""
+    refute conn.halted
+    assert conn.status == 204
+  end
+
+  # TODO: there is more complex error cases that can be tested
+  test "if prediction format is incorrect return 400 error", %{conn: conn} do
+    %{"error" => error} =
+      conn
+      |> post(Routes.challenge_path(conn, :accept_user_predictions, Ecto.UUID.generate(), Ecto.UUID.generate()), %{
+        "predictions" => nil
+      })
+      |> json_response(422)
+
+    assert error == "invalid predictions array"
+  end
+
+  test "if no challenge found returns 404 eror", %{conn: conn} do
+    %{"error" => error} =
+      conn
+      |> post(Routes.challenge_path(conn, :accept_user_predictions, Ecto.UUID.generate(), Ecto.UUID.generate()), %{
+        "predictions" => Enum.map(1..10, &%{"match_id" => &1, "prediction" => "draw"})
+      })
+      |> json_response(404)
+
+    assert error == "no active challenges found"
   end
 end

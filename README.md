@@ -52,4 +52,9 @@ body parameters: { "predictions" => [prediction1, ..., prediction10] }
   prediction: %{match_id: 3255586, prediction: "home" | "draw" | "away"}
 
 response: 204
+
+errors: 
+  400 {"error": "invalid user_id or challenge_id"}
+  422 {"error": `invalid prediction error message`}
+  404 {"error": `challenge not found error message`}
 ```

@@ -41,6 +41,7 @@ defmodule FCDemoWeb.ChallengeController do
     else
       {:error, :invalid} -> conn |> put_status(400) |> json(%{error: "invalid user_id or challenge_id"})
       {:error, {:invalid_predictions, error}} -> conn |> put_status(422) |> json(%{error: error})
+      {:error, {:not_found, error}} -> conn |> put_status(404) |> json(%{error: error})
     end
   end
 
