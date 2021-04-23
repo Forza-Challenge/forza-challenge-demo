@@ -19,7 +19,7 @@ defmodule FCDemoWeb.ChallengeController do
           json(conn, %{active_challenges: nil})
 
         {challenge_id, match_ids} ->
-          json(conn, %{active_challenges: [%{id: challenge_id, mathes: get_challenge_matches(match_ids)}]})
+          json(conn, %{active_challenges: [%{id: challenge_id, matches: get_challenge_matches(match_ids)}]})
       end
     else
       {:error, :invalid} -> conn |> put_status(400) |> json(%{error: "invalid user_id"})
@@ -52,7 +52,18 @@ defmodule FCDemoWeb.ChallengeController do
 
   defp get_challenge_matches(match_ids) do
     Matches.get_matches_by_ids(match_ids)
-    |> Enum.map(&Map.drop(&1, [:betradar_id, :name, :inserted_at, :updated_at]))
+    |> Enum.map(
+      &Map.take(&1, [
+        :id,
+        :starts_at,
+        :tournament_name,
+        :home_team_name,
+        :away_team_name,
+        :home_team_odds,
+        :draw_odds,
+        :away_team_odds
+      ])
+    )
   end
 
   # validate predictions
