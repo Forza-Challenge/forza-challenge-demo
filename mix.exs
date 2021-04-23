@@ -5,11 +5,12 @@ defmodule FCDemo.MixProject do
     [
       app: :forza_challenge_demo,
       version: "0.1.0",
-      elixir: "~> 1.7",
+      elixir: "~> 1.11.4",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
+      releases: releases(),
       deps: deps()
     ]
   end
@@ -58,6 +59,14 @@ defmodule FCDemo.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+    ]
+  end
+
+  defp releases() do
+    [
+      forza_challenge_demo: [
+        include_executables_for: [:unix]
+      ]
     ]
   end
 end
