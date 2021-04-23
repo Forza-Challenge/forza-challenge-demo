@@ -18,4 +18,8 @@ defmodule FCDemoWeb.Router do
 
     post "/users/:user_id/challenges/:challenge_id", ChallengeController, :accept_user_predictions
   end
+
+  scope "/status", FCDemoWeb do
+    get "/healh", StatusController, :health
+  end
 end
