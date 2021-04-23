@@ -40,3 +40,16 @@ resposes:
 
 errors: 400 {"error": "invalid user_id"}
 ```
+
+3. Make challenge predictions for user:
+```
+POST  /api/v1/users/:user_id/challenges/:challenge_id
+
+path parameters: user_id, challenge_id
+
+body parameters: { "predictions" => [prediction1, ..., prediction10] }
+
+  prediction: %{match_id: 3255586, prediction: "home" | "draw" | "away"}
+
+response: 204
+```

@@ -40,4 +40,36 @@ defmodule FCDemoWeb.ChallengeControllerTest do
 
     assert is_nil(challenges)
   end
+
+  test "will accept user predictions on active challenge", %{conn: conn} do
+    # populate matches via REAL API CALL
+    :ok = SuperbetMatchesSync.perform()
+
+    %{"user_id" => user_id} =
+      conn
+      |> post(Routes.user_path(conn, :create), %{"device_id" => Ecto.UUID.generate()})
+      |> json_response(200)
+
+    %{"active_challenges" => [%{"id" => challenge_id, "matches" => challenge_matches}]} =
+      conn
+      |> get(Routes.challenge_path(conn, :index, user_id))
+      |> json_response(200)
+
+    predictions =
+      Enum.map(challenge_matches, fn %{"id" => match_id} ->
+        %{
+          match_id: match_id,
+          prediction: Enum.random(["home", "draw", "away"])
+        }
+      end)
+
+    resp =
+      conn
+      |> post(Routes.challenge_path(conn, :accept_user_predictions, user_id, challenge_id), %{
+        "predictions" => predictions
+      })
+      |> json_response(204)
+
+    assert resp == ""
+  end
 end

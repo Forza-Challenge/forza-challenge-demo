@@ -6,7 +6,7 @@ defmodule FCDemoWeb.ChallengeController do
   alias FCDemo.Matches
 
   @predictions_types %{
-    match_id: :string,
+    match_id: :integer,
     prediction: :string
   }
 
