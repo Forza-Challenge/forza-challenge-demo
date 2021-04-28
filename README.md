@@ -69,12 +69,49 @@ errors:
   404 {"error": `challenge not found error message`}
 ```
 
-## API Example
+## API Calls Examples
 ```Bash
 curl --header "Content-Type: application/json" \
   --request POST \
   --data '{"device_id":"72fe37ee-62f5-444f-a237-dc00c195d1c5"}' \
   https://demo.forza-challenge.com/api/v1/users
 
-{"user_id":"25bf37ce-067e-4ecd-ad57-f0531723baf9"}
+{"user_id":"713386df-6315-483c-b06a-c39b5776c961"}
+```
+
+```Bash
+curl --header "Content-Type: application/json" \
+  --request GET \
+  https://demo.forza-challenge.com/api/v1/users/713386df-6315-483c-b06a-c39b5776c961/challenges
+
+{
+    "active_challenges": [
+        {
+            "id": "6bf76dcd-a431-4426-98ee-2d73d5c78d7a",
+            "matches": [
+                {
+                    "away_team_name": "Liverpool",
+                    "away_team_odds": 2.6,
+                    "draw_odds": 3.55,
+                    "home_team_name": "Manchester Utd",
+                    "home_team_odds": 2.75,
+                    "id": 2737856,
+                    "starts_at": "2021-05-02T15:30:00Z",
+                    "tournament_name": "England - Premier League|Anglia - Premier League|Engleska - 1.liga|Engleska - Premijer Liga|Anglia - 1.liga"
+                },
+                ...
+                {
+                    "away_team_name": "Ethiopia Bunna",
+                    "away_team_odds": 1.38,
+                    "draw_odds": 4.1,
+                    "home_team_name": "Jimma Aba J.",
+                    "home_team_odds": 7.0,
+                    "id": 3297266,
+                    "starts_at": "2021-04-28T16:00:00Z",
+                    "tournament_name": "Premier League|Etiopia - Premier League|Premier League||Etiopia - 1.liga"
+                }
+            ]
+        }
+    ]
+}
 ```
