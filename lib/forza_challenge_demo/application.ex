@@ -18,6 +18,7 @@ defmodule FCDemo.Application do
       # Start a worker by calling: FCDemo.Worker.start_link(arg)
       # {FCDemo.Worker, arg}
       {Finch, name: FCDemo.Finch},
+      {FCDemo.GlobalJobsScheduler, superbet_matches_sync_params()},
       {ConCache,
        [
          name: FCDemo.ConCache,
@@ -37,5 +38,14 @@ defmodule FCDemo.Application do
   def config_change(changed, _new, removed) do
     FCDemoWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  defp superbet_matches_sync_params() do
+    %{
+      enable: Application.fetch_env!(:forza_challenge_demo, :env) != :test,
+      interval: :timer.seconds(5),
+      module: FCDemo.SuperbetMatchesSync,
+      state: []
+    }
   end
 end

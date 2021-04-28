@@ -55,7 +55,7 @@ defmodule FCDemo.GlobalJobsScheduler do
     {:ok, state}
   end
 
-  def init(%{enabled: false}), do: :ignore
+  def init(%{enable: false}), do: :ignore
 
   @impl true
   def handle_info(:execute_periodic_job, %__MODULE__{} = scheduler_state) do

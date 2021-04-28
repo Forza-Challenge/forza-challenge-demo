@@ -45,6 +45,8 @@ defmodule FCDemo.SuperbetMatchesSync do
         end)
 
       Logger.info("Superbet matches sync finished: upserted #{upserted}, invalid #{invalid}")
+
+      {:ok, opts}
     else
       {:error, reason} -> Logger.error("Superbet matches sync failed: #{inspect(reason)}")
     end

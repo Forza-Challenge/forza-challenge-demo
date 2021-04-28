@@ -5,11 +5,12 @@
 # is restricted to this project.
 
 # General application configuration
-use Mix.Config
+import Config
 
 config :forza_challenge_demo,
   namespace: FCDemo,
-  ecto_repos: [FCDemo.Repo]
+  ecto_repos: [FCDemo.Repo],
+  env: config_env()
 
 # Configures the endpoint
 config :forza_challenge_demo, FCDemoWeb.Endpoint,
