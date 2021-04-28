@@ -20,6 +20,6 @@ defmodule FCDemoWeb.Router do
   end
 
   scope "/status", FCDemoWeb do
-    get "/healh", StatusController, :health
+    get "/health", StatusController, :health
   end
 end

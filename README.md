@@ -2,7 +2,17 @@
 
 Forza Challenge API Demo
 
-## API
+## API Host
+
+`https://demo.forza-challenge.com`
+
+```Bash
+curl https://demo.forza-challenge.com/status/health
+
+{"status":"ok"}
+```
+
+## API Description
 
 1. Create user
 ```
@@ -57,4 +67,14 @@ errors:
   400 {"error": "invalid user_id or challenge_id"}
   422 {"error": `invalid prediction error message`}
   404 {"error": `challenge not found error message`}
+```
+
+## API Example
+```Bash
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"device_id":"72fe37ee-62f5-444f-a237-dc00c195d1c5"}' \
+  https://demo.forza-challenge.com/api/v1/users
+
+{"user_id":"25bf37ce-067e-4ecd-ad57-f0531723baf9"}
 ```

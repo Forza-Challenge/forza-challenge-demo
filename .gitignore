@@ -28,4 +28,6 @@ forza_challenge_demo-*.tar
 /priv/static/
 
 # Misc
-.elixir_ls
+/.elixir_ls/
+*.pem
+
