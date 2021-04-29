@@ -26,16 +26,18 @@ defmodule Mix.Tasks.DeployLatest do
 
     info("Retrieve an authentication token and authenticate Docker client to registry")
 
-    shell_cmd(
-      "aws ecr get-login-password --profile #{@aws_iam_profile} | " <>
-        "docker login --username AWS --password-stdin #{@aws_ecr}"
-    )
+    :ok =
+      shell_cmd(
+        "aws ecr get-login-password --profile #{@aws_iam_profile} | " <>
+          "docker login --username AWS --password-stdin #{@aws_ecr}"
+      )
 
     info("Push image to AWS repository")
     :ok = shell_cmd("docker push #{@aws_ecr}/#{@app}:latest")
 
     # pull, stop & run over SSH
     info("Authorize remote docker")
+
     :ok = ssh_remote_cmd("aws ecr get-login-password | sudo docker login --username AWS --password-stdin #{@aws_ecr}")
 
     info("Pull latest docker image")
