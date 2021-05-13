@@ -1,7 +1,7 @@
 #########################
 # Stage: builder        #
 #########################
-FROM hexpm/elixir:1.11.4-erlang-23.3.1-alpine-3.13.3 as builder
+FROM hexpm/elixir:1.11.4-erlang-23.3.4-alpine-3.13.3 as builder
 
 # install build dependencies
 RUN apk add --no-cache --update git build-base
