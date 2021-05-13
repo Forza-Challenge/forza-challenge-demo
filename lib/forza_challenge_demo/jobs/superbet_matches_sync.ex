@@ -87,7 +87,7 @@ defmodule FCDemo.SuperbetMatchesSync do
       name: match.mn,
       starts_at: match.utcDate,
       betradar_id: match.bri,
-      tournament_name: match.tn2,
+      tournament_name: maybe_split_tournament_name(match.tn2),
       home_team_odds: find_odds_by_oi(match.odds, @home_team_odds_oi),
       draw_odds: find_odds_by_oi(match.odds, @draw_odds_oi),
       away_team_odds: find_odds_by_oi(match.odds, @away_team_odds_oi),
@@ -97,6 +97,14 @@ defmodule FCDemo.SuperbetMatchesSync do
 
     Matches.upsert_superebet_match(params)
   end
+
+  # "Serbia - Superliga|Serbia - Superliga|Srbija - 1.liga|Srbija - Superliga|Serbia - 1.liga"
+  def maybe_split_tournament_name(full_tournament_name) when is_binary(full_tournament_name) do
+    [short_name | _] = String.split(full_tournament_name, "|")
+    short_name
+  end
+
+  def maybe_split_tournament_name(_), do: nil
 
   # TODO: microoptimization can be applied here to iterate odds only once
   defp find_odds_by_oi(odds, oi) when is_list(odds) do

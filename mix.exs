@@ -4,7 +4,7 @@ defmodule FCDemo.MixProject do
   def project do
     [
       app: :forza_challenge_demo,
-      version: "0.2.0",
+      version: "0.3.0",
       elixir: "~> 1.11.4",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix] ++ Mix.compilers(),
