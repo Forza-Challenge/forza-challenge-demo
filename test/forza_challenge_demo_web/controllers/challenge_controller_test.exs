@@ -5,7 +5,7 @@ defmodule FCDemoWeb.ChallengeControllerTest do
 
   test "can return active challenges for use", %{conn: conn} do
     # populate matches via REAL API CALL
-    :ok = SuperbetMatchesSync.perform()
+    {:ok, []} = SuperbetMatchesSync.perform()
 
     %{"user_id" => user_id} =
       conn
@@ -43,7 +43,7 @@ defmodule FCDemoWeb.ChallengeControllerTest do
 
   test "will accept user predictions on active challenge", %{conn: conn} do
     # populate matches via REAL API CALL
-    :ok = SuperbetMatchesSync.perform()
+    {:ok, []} = SuperbetMatchesSync.perform()
 
     %{"user_id" => user_id} =
       conn

@@ -9,7 +9,7 @@ defmodule FCDemo.SuperbetMatchesSyncTest do
   alias FCDemo.Repo
 
   test "can sync matches via REAL API CALL" do
-    :ok = SuperbetMatchesSync.perform()
+    {:ok, []} = SuperbetMatchesSync.perform()
     now = DateTime.utc_now()
 
     matches = Repo.all(from sm in SuperbetMatch, where: sm.starts_at >= ^now)

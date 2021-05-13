@@ -13,7 +13,7 @@ defmodule FCDemo.ChallengesTest do
     now = DateTime.utc_now()
 
     # populate matches via REAL API CALL
-    :ok = SuperbetMatchesSync.perform()
+    {:ok, []} = SuperbetMatchesSync.perform()
 
     {challenge_id, challenge_matches} = Challenges.generate_random_challenge()
 

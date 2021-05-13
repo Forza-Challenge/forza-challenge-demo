@@ -100,8 +100,13 @@ defmodule FCDemo.SuperbetMatchesSync do
 
   # TODO: microoptimization can be applied here to iterate odds only once
   defp find_odds_by_oi(odds, oi) when is_list(odds) do
-    odds
-    |> Enum.find(&(Map.get(&1, "oi") == oi))
-    |> Map.get("ov")
+    case Enum.find(odds, &(Map.get(&1, "oi") == oi)) do
+      nil ->
+        Logger.warn("Superbet matches sync: odds for #{oi} is absent! #{inspect(odds)}")
+        nil
+
+      odds when is_map(odds) ->
+        Map.get(odds, "ov")
+    end
   end
 end
